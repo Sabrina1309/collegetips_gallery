@@ -1,26 +1,22 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const images = document.querySelectorAll('.gallery img');
-    const button = document.querySelector('.seeMore button');
-    let visibleCount = 2; // Start with 2 images visible
+var modal = document.getElementById("myModal");
+var closeBtn = document.querySelector(".close");
+var modalImg = document.getElementById("imgInModal");
+var captionText = document.getElementById("caption");
 
-    // Hide all images except the first 2
-    images.forEach((img, index) => {
-        if (index >= visibleCount) {
-            img.style.display = 'none';
-        }
-    });
+//getting all imgs with class
 
-    button.addEventListener('click', () => {
-        const nextImages = Array.from(images).slice(visibleCount, visibleCount + 2);
-        nextImages.forEach(img => {
-            img.style.display = 'block';
-        });
-        visibleCount += 2;
+var images = document.querySelectorAll(".clickable-img");
 
-        // Disable button if all images are visible
-        if (visibleCount >= images.length) {
-            button.disabled = true;
-            button.textContent = 'No More Photos';
-        }
+//add click event to each image
+images.forEach(function(img) {
+    img.addEventListener("click",  function() {
+        modal.style.display= "block";
+        modalImg.src = this.src;
+        captionText.innerHTML = this.alt;
     });
 });
+
+closeBtn.onclick = function() {
+    modal.style.display = "none";
+};
+  
